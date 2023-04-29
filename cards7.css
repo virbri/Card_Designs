@@ -1,0 +1,535 @@
+:root {
+  --corner-round-small: 5px;
+  --corner-round-big: 10px;
+}
+
+body,
+button,
+buttonold {
+  font-family: 'Bebas Neue', sans-serif;
+  z-index: 1;
+}
+
+/*the elements with hash infront(ids) are bits I got help with bing chat as I was having trouble combining with matthews code */
+#open {
+  position: absolute;
+  left: -9999px;
+}
+.canvas {
+  display: none;
+  z-index: 0;
+}
+.canvas-hidden {
+  display: none;
+}
+h1 {
+  text-align: center
+}
+
+.buttonold-control {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.buttonold {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  background: green;
+  border: none;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  width: 150px;
+  height: 45px;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: var(--corner-round-small);
+}
+
+.buttonold:hover {
+  background-color: grey;
+}
+
+.buttonold:active {
+  background-color: green;
+  transform: translateX(2px) translateY(2px);
+}
+.buttonold:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  height: 60%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pack {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  height: auto;
+  margin-top: 25px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  /* display: inline-block; */
+  background: transparent;
+  color: black;
+  width: 253px;
+  height: 337px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin:  center center;
+  transition: transform 2s;
+ 
+}
+
+.card .place {
+  position: absolute;
+  border-style: non;
+  border-width: 1px;
+  width: 253px;
+  height: 337px;
+  background-size: 253px 337px;
+  Background-position: center;
+  Background-repeat: no-repeat;
+  border-radius: var(--corner-round-big);
+}
+
+.card .face {
+  position: absolute;
+  border: 1px solid #333;
+  color: white;
+  width: 253px;
+  height: 337px;
+  border-radius: var(--corner-round-big);
+  box-shadow: 3px 3px 5px #666;
+  display: none;
+}
+
+.card .back {
+  display: none;
+  background-image: url("https://raw.githubusercontent.com/virbri/Card_Designs/main/card_back_small.png");
+  background-size:  253px 337px;
+  Background-position: center;
+  Background-repeat: no-repeat;
+  z-index: 15;
+  /* transform: rotateY(180deg); */
+
+}
+
+.card .back.glow{ /* https://codersblock.com/blog/creating-glow-effects-with-css/ */
+  z-index: -12;
+  box-shadow:
+      inset 0 0 50px rgb(255, 255, 255, 10),      
+      inset 20px 0 120px rgb(153, 255, 0, 50),  
+      inset -20px 0 80px rgb(0, 255, 76, 40),
+      inset 20px 0 120px rgb(166, 255, 0, 80),  
+      inset -20px 0 80px rgb(255, 221, 0, 60), 
+      0 0 20px #ffffff,       
+      -10px 0 10px rgb(30, 255, 0, 40),        
+      10px 0 10px rgb(0, 255, 55, 60);         
+}
+.card .back.glowun_uncommon{
+  z-index: -1;
+  box-shadow:
+    inset 0 0 50px rgb(135, 206, 235, 20),  
+    inset 20px 0 120px rgb(65, 105, 225, 50),   
+    inset -20px 0 80px rgb(0, 0, 128, 80), 
+    inset 20px 0 120px rgb(0, 217, 255, 60), 
+    inset -20px 0 80px rgb(65, 105, 225, 40),      
+    -10px 0 10px rgb(0, 115, 128),        
+    10px 0 10px royalblue;         
+}
+.card .back.glow_rare{ /* https://codersblock.com/blog/creating-glow-effects-with-css/ */
+z-index: -12;
+box-shadow:
+    inset 0 0 50px rgb(255, 255, 255, 20),  
+    inset 20px 0 120px rgb(255, 0, 255, 50),   
+    inset -20px 0 80px rgb(72, 0, 255, 40), 
+    inset 20px 0 120px rgb(255, 0, 255, 80), 
+    inset -20px 0 80px rgb(136, 0, 255, 60),      
+    -10px 0 10px rgb(162, 0, 255, 40),        
+    10px 0 10px rgb(166, 0, 255, 60);          
+}
+.card .back.glow_legendary{
+z-index: -1;
+box-shadow:
+    inset 0 0 50px rgb(255, 213, 0, 00),       
+    inset 20px 0 120px rgb(255, 213, 0, 50),   
+    inset -20px 0 80px rgb(255, 196, 0, 40),  
+    inset 20px 0 120px rgb(255, 225, 0, 80), 
+    inset -20px 0 80px rgb(255, 234, 0, 60),          
+    -10px 0 10px rgb(255, 208, 0, 40),       
+    10px 0 10px rgb(255, 183, 0, 60);         
+}
+.card .front {
+display: none;
+background-color: #666;
+background-size: 253px 337px;
+z-index: 10;
+transform: scaleX(-1);
+}
+.front .energy {
+position: absolute;
+top: 31px;
+left: 27px;
+font-size: 24px;
+}
+.energy-shadow {
+ 
+  text-shadow: "";
+ 
+}
+.front .mod {
+  position: absolute;
+  top: 104px;
+  color:grey;
+  
+
+  }
+
+
+
+.front .title {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: rgb(49, 69, 15);
+    width: 240px;
+    max-height: 60px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff;
+  }
+.front .damage {
+position: absolute;
+bottom: 65px;
+left: 24px;
+color: rgb(7, 54, 7);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+}
+
+.front .health {
+position: absolute;
+bottom: 65px;
+right: 26px;
+font-size: 16px;
+color: rgb(7, 54, 7);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+}
+
+.front .description {
+    position: absolute;
+    top: 280px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 14px;
+    color: rgb(49, 69, 15);
+    width: 91%;
+      max-height: 50px; 
+      overflow: hidden;
+      font-weight: 700;
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff;
+  }
+.card .back.glow.fade {
+  transition: box-shadow 1s;
+  box-shadow: none;
+}
+
+
+
+
+
+.rarity {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%)
+}
+
+.bottomRight {
+  position: absolute;
+  text-align: center;
+  font-size: 24px;
+  bottom: 0;
+  right: 0;
+  margin: 2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* .blue {
+  background: blue;
+}
+
+.red {
+  background: red;
+} */
+
+.bottomLeft {
+  position: absolute;
+  text-align: center;
+  font-size: 24px;
+  bottom: 0;
+  left: 0;
+  margin: 2px;
+  width: 30px;
+  height: 30px;
+  background: #DAA520;
+  border-radius: 50%;
+}
+
+.topCentre {
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+@keyframes animIn {
+  0%   { left:-2000px; top:0px;}
+  25%  { left:0px; top:0px;}
+  50%  { left:-5px; top:0px;}
+  75%  { left:0px; top:0px;}
+  100% { left:0px; top:0px;}
+}
+.animIn {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    animation-name: animIn;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+}
+
+
+@keyframes shake { /*https://css-tricks.com/snippets/css/shake-css-keyframe-animation/ */
+10%, 90% {
+transform: translate3d(2px, 2px, 2px);
+}
+
+20%, 80% {
+transform: translate3d(-2px, -2px, 0);
+}
+
+30%, 50%, 70% {
+transform: translate3d(2px, 2px, 2px);
+}
+
+40%, 60% {
+transform: translate3d(-2px, -2px, 0);
+}
+
+}
+
+
+
+.shake{
+animation: shake 1.35s cubic-bezier(.36,.07,.19,.97) both;
+transform: translate3d(0, 0, 0);
+backface-visibility: hidden;
+perspective: 1000px;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+
+}
+
+/* .card .back {
+position: absolute;
+width: 100%;
+height: 100%;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+} */
+
+
+.card.flipped .front {
+z-index: 10;
+}
+
+.card.flipped {
+-webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+
+
+/*new code*/
+body {
+  background-image: url("https://partnerstudio.hu/wp-content/uploads/2021/03/cyberpunk-after.jpg");
+  background-color: #cccccc;
+}
+
+.button-c {
+  background-image: url("https://img.freepik.com/premium-photo/black-stone-texture-dark-slate-background-top-view_88281-1206.jpg");
+
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 200px; /* set your desired width */
+  height: 50px; /* set your desired height */
+}
+
+
+button {
+  background: green;
+  border: none;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  width: 150px;
+  height: 45px;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: var(--corner-round-small);
+}
+
+button:hover {
+  background-color: grey;
+}
+
+button:active {
+  background-color: green;
+  transform: translateX(2px) translateY(2px);
+}
+
+
+.overallButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button-control {
+  position: absolute;
+  top: 200px;
+  left: 0;
+}
+.button-control.show {
+  left: 0;
+}
+.button-control2 {
+  position: absolute;
+  top: 900px;
+  left: 0;
+}
+.button-control2.show {
+  left: 0;
+}
+.button-wrapper {
+  display: inline-flex;
+}
+.button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.bigButton {
+  background: green;
+  border: none;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  width: 210px;
+  height: 80px;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: var(--corner-round-small);
+}
+
+.smallButton {
+  background: green;
+  border: none;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  width: 160px;
+  height: 50px;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: var(--corner-round-small);
+  z-index: 5;
+}
+.button-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  z-index: 5;
+}
+.button-row button {
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.button-circle-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-goBack {
+  width: 100px;
+}
+
+.totalPacksCircle {
+  width: 100px;
+  height: 100px;
+  background-color: hotpink;
+  border-radius: 50%;
+}
+
+.button-goBack:active {
+  transform: translateY(2px);
+  transform: translateX(-50%);
+}
+
+.circleContent {
+  color: black;
+  font-size: medium;
+}
+
+
+
